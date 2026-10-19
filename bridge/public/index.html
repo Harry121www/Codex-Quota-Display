@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Codex · 屏幕控制台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/console.css">
+  <script type="module" src="/console.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Codex 屏幕控制台首页"><span class="brand-mark">◈</span> CODEX <span class="brand-divider">/</span> <span class="brand-caption">屏幕控制台</span></a>
+      <span class="local-badge"><span class="dot"></span> 本机控制</span>
+    </header>
+
+    <section class="page-title">
+      <p class="eyebrow">YOUR DESK, YOUR DISPLAY</p>
+      <h1>小屏幕，随你喜欢。</h1>
+      <p class="intro">查看额度，或放一张喜欢的图片。通过 Wi-Fi，把桌面变成你的风格。</p>
+    </section>
+
+    <div class="workspace">
+      <div class="controls-stack">
+      <section class="panel display-panel" aria-labelledby="displayTitle">
+        <div class="panel-heading"><div><p class="section-index">01 / DISPLAY</p><h2 id="displayTitle">显示内容</h2></div><span id="displayBadge" class="subtle-badge">正在读取</span></div>
+        <div class="mode-switch" role="group" aria-label="屏幕显示模式">
+          <button id="quotaMode" type="button" aria-pressed="true" disabled>订阅额度</button>
+          <button id="imageMode" type="button" aria-pressed="false" disabled>我的图片</button>
+        </div>
+        <label class="upload-field" for="imageFile"><span class="upload-icon" aria-hidden="true">↥</span><strong>选择一张图片</strong><span>PNG / JPG / WebP · 最大 12 MB</span><input id="imageFile" type="file" accept="image/png,image/jpeg,image/webp" disabled></label>
+        <div class="image-options"><label for="imageFit">画面适配</label><select id="imageFit"><option value="contain">完整显示 · 留边</option><option value="cover">填满屏幕 · 居中裁切</option></select></div>
+        <p id="imageInfo" class="image-info">自动适配 240 × 240，支持静态图片。</p>
+        <div class="image-actions"><button id="uploadImage" class="save-button" type="button" disabled><span>上传并显示</span><span aria-hidden="true">↗</span></button><button id="cancelImage" class="text-button" type="button" hidden>取消选择</button></div>
+        <p id="imageMessage" class="save-message" role="status" aria-live="polite">上传后约 15 秒同步；切换模式立即保存。</p>
+      </section>
+      <section class="panel settings-panel" aria-labelledby="settingsTitle">
+        <div class="panel-heading"><div><p class="section-index">02 / APPEARANCE</p><h2 id="settingsTitle">外观设置</h2></div><span id="draftBadge" class="subtle-badge">正在读取</span></div>
+        <form id="themeForm">
+          <fieldset id="settingsFields" disabled>
+            <div class="field-heading"><label for="accentHex">主题色</label><span>标题、额度数字与进度条</span></div>
+            <div class="color-field"><input id="accentPicker" type="color" value="#ffff00" aria-label="选择主题色"><span class="color-symbol">#</span><input id="accentHex" class="hex-field" value="FFFF00" maxlength="6" autocomplete="off" spellcheck="false" aria-label="主题色十六进制值"><span class="field-format">HEX</span></div>
+            <p class="field-label">快速选择</p>
+            <div id="presets" class="presets" aria-label="预设主题色">
+              <button type="button" class="preset" data-color="#FFFF00" aria-label="日光黄" aria-pressed="true"><span class="swatch swatch-yellow"></span><span>日光</span></button>
+              <button type="button" class="preset" data-color="#54E3B5" aria-label="薄荷绿" aria-pressed="false"><span class="swatch swatch-mint"></span><span>薄荷</span></button>
+              <button type="button" class="preset" data-color="#61C8FF" aria-label="冰川蓝" aria-pressed="false"><span class="swatch swatch-blue"></span><span>冰川</span></button>
+              <button type="button" class="preset" data-color="#B69BFF" aria-label="莓果紫" aria-pressed="false"><span class="swatch swatch-purple"></span><span>莓果</span></button>
+              <button type="button" class="preset" data-color="#FF9D6E" aria-label="珊瑚橙" aria-pressed="false"><span class="swatch swatch-orange"></span><span>珊瑚</span></button>
+              <button type="button" class="preset" data-color="#E8ECEF" aria-label="纸白" aria-pressed="false"><span class="swatch swatch-white"></span><span>纸白</span></button>
+            </div>
+
+            <div class="divider"></div>
+            <div class="field-heading"><label for="backgroundHex">背景色</label><span>深色背景更适合桌面常亮</span></div>
+            <div class="color-field"><input id="backgroundPicker" type="color" value="#080808" aria-label="选择背景色"><span class="color-symbol">#</span><input id="backgroundHex" class="hex-field" value="080808" maxlength="6" autocomplete="off" spellcheck="false" aria-label="背景色十六进制值"><span class="field-format">HEX</span></div>
+            <p id="colorError" class="field-error" aria-live="polite"></p>
+            <button id="resetButton" class="text-button" type="button">↺ 恢复默认黄色</button>
+          </fieldset>
+          <div class="save-area"><button id="saveButton" class="save-button" type="submit" disabled><span id="saveLabel">保存并同步</span><span aria-hidden="true">↗</span></button><p id="saveMessage" class="save-message" role="status" aria-live="polite">正在连接本地服务…</p></div>
+        </form>
+      </section>
+      </div>
+
+      <section class="panel preview-panel" aria-labelledby="previewTitle">
+        <div class="panel-heading"><div><p class="section-index">03 / LIVE PREVIEW</p><h2 id="previewTitle">屏幕预览</h2></div><span class="dimension-badge">240 × 240</span></div>
+        <div class="device-stage"><div class="screen-bezel"><i class="screw top-left"></i><i class="screw top-right"></i><i class="screw bottom-left"></i><i class="screw bottom-right"></i><div id="screen" class="screen"><canvas id="imagePreview" width="240" height="240" hidden aria-label="图片在屏幕上的显示预览"></canvas><div class="screen-title">CODEX</div><div id="previewCards" class="screen-cards"></div><div id="previewEmpty" class="screen-empty">正在读取额度…</div><div id="previewFooter" class="screen-footer">Waiting for data</div></div></div></div>
+        <p id="previewCaption" class="preview-caption">预览会即时变化，保存后才会应用到小屏幕。</p>
+        <div class="status-grid">
+          <div class="status-item"><span class="status-label">额度服务</span><span id="serviceStatus" class="status-value"><i class="status-dot"></i> 连接中</span></div>
+          <div class="status-item"><span class="status-label">屏幕连接</span><span id="deviceStatus" class="status-value"><i class="status-dot"></i> 等待设备</span></div>
+        </div>
+        <p id="deviceHint" class="device-hint">首次使用控制台，需要更新一次屏幕程序。</p>
+      </section>
+    </div>
+    <footer class="page-footer"><span>ESP32-C3 <span class="footer-slash">/</span> ST7789</span><span>图片与设置通常在 15 秒内同步。</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "listenHost": "0.0.0.0",
+  "port": 8765,
+  "refreshSeconds": 60,
+  "staleSeconds": 180,
+  "deviceToken": "REPLACE_WITH_RANDOM_DEVICE_TOKEN",
+  "codexPath": ""
+}

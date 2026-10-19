@@ -1,0 +1,10 @@
+bridge/config.json
+bridge/theme.json
+bridge/theme.json.*.tmp
+bridge/display.json
+bridge/display.json.*.tmp
+firmware/CodexQuota/config.h
+.tools/
+.build/
+node_modules/
+*.log
