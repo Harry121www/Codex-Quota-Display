@@ -75,7 +75,7 @@ node bridge/server.mjs --check
 node bridge/server.mjs
 ```
 
-On Windows, you can run `start-bridge.cmd`. Keep its window open. Closing the window, stopping the process, or putting the computer to sleep interrupts updates. The default listener is `0.0.0.0:8765`; the ESP32 must be able to reach that port.
+On Windows, run `start-bridge.cmd` to start the bridge in the background. Once startup is confirmed, you can close the launcher window; repeated launches reuse the running service. Use `stop-bridge.cmd` to stop it. Logs are saved in `.runtime/bridge.stdout.log` and `.runtime/bridge.stderr.log`. You can also run `node bridge/start.mjs` from a terminal. The direct `node bridge/server.mjs` command runs in the foreground and stops when its terminal closes. Computer sleep still interrupts updates. The default listener is `0.0.0.0:8765`; the ESP32 must be able to reach that port.
 
 ### 2. Firmware
 
@@ -130,7 +130,7 @@ Generated configurations, images, themes, tools, logs, and build outputs are exc
 node --test bridge/test/*.test.mjs
 ```
 
-The 14 tests cover quota normalization, stale data, authentication, theme/image persistence, RGB565 byte order, image fitting, mode switching, and invalid requests. The firmware has compiled for ESP32-C3 with ESP32 Arduino core 3.3.10 and ArduinoJson 7.3.2; compilation does not replace physical display verification.
+The 17 tests cover quota normalization, stale data, authentication, theme/image persistence, RGB565 byte order, image fitting, mode switching, invalid requests, background startup, duplicate launches, and verified shutdown. The firmware has compiled for ESP32-C3 with ESP32 Arduino core 3.3.10 and ArduinoJson 7.3.2; compilation does not replace physical display verification.
 
 With Arduino CLI and the board package/libraries installed in their default locations:
 
@@ -143,6 +143,7 @@ bridge/                    Node.js bridge, local console, and tests
 firmware/CodexQuota/        Arduino sketch and example configuration
 start-bridge.cmd           Windows bridge launcher
 open-console.cmd           Windows console launcher
+stop-bridge.cmd            Stop the background bridge
 ```
 
 ## References

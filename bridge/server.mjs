@@ -38,7 +38,7 @@ async function refresh() {
   } catch (error) {
     state.failed = true;
     rpc?.close(); rpc = null;
-    console.error(`${error.message}. Check Codex CLI login and network access.`);
+    console.error(`[${new Date().toISOString()}] ${error.message}. Check Codex CLI login and network access.${checkOnly ? '' : ` Retrying in ${config.refreshSeconds}s.`}`);
     if (checkOnly) process.exitCode = 1;
   }
   if (!stopping && !checkOnly) timer = setTimeout(refresh, config.refreshSeconds * 1000);

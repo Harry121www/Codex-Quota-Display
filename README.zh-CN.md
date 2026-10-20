@@ -75,7 +75,7 @@ node bridge/server.mjs --check
 node bridge/server.mjs
 ```
 
-Windows 也可双击 `start-bridge.cmd`，并保持窗口开启。关闭窗口、停止进程或电脑休眠会中断更新。默认监听 `0.0.0.0:8765`，ESP32 需要能访问该端口。
+Windows 双击 `start-bridge.cmd` 后会检查服务是否启动成功，并转到后台运行。启动确认后可以关闭窗口，重复启动会复用现有服务；运行 `stop-bridge.cmd` 可停止服务。日志保存在 `.runtime/bridge.stdout.log` 和 `.runtime/bridge.stderr.log`，也可通过 `node bridge/start.mjs` 启动。直接运行 `node bridge/server.mjs` 则仍是前台模式，关闭其终端会停止服务；电脑休眠仍会中断更新。默认监听 `0.0.0.0:8765`，ESP32 需要能访问该端口。
 
 ### 2. 烧录固件
 
@@ -130,7 +130,7 @@ Windows 也可双击 `start-bridge.cmd`，并保持窗口开启。关闭窗口�
 node --test bridge/test/*.test.mjs
 ```
 
-14 项测试覆盖额度转换、过期状态、鉴权、主题与图片持久化、RGB565 字节序、适配裁切、模式切换和非法请求。固件已使用 ESP32 Arduino core 3.3.10、ArduinoJson 7.3.2 通过 ESP32-C3 编译；编译不能代替实物验证。
+17 项测试覆盖额度转换、过期状态、鉴权、主题与图片持久化、RGB565 字节序、适配裁切、模式切换、非法请求、后台启动、重复启动和进程身份校验。固件已使用 ESP32 Arduino core 3.3.10、ArduinoJson 7.3.2 通过 ESP32-C3 编译；编译不能代替实物验证。
 
 已在默认位置安装 Arduino CLI、开发板包和库时，可运行：
 
@@ -143,6 +143,7 @@ bridge/                    电脑服务、网页控制台与测试
 firmware/CodexQuota/        Arduino 固件和示例配置
 start-bridge.cmd           Windows 服务启动器
 open-console.cmd           Windows 控制台启动器
+stop-bridge.cmd            停止后台服务
 ```
 
 ## 参考

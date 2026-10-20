@@ -1,4 +1,4 @@
 @echo off
 cd /d "%~dp0"
-node bridge\server.mjs
+node bridge\start.mjs
 pause

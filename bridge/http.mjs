@@ -77,6 +77,7 @@ export function createQuotaServer(config, state, { themeStore = createThemeStore
         const theme = themeStore.get();
         const result = { theme, palette: paletteHex(theme) };
         if (route === '/api/console') Object.assign(result, {
+          bridge: { name: 'codex-quota-display', pid: process.pid },
           quota: quotaView(state, config.staleSeconds), device: { ...device }, display: displayStore.get(),
         });
         send(response, 200, result); return;

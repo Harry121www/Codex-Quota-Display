@@ -6,5 +6,6 @@ bridge/display.json.*.tmp
 firmware/CodexQuota/config.h
 .tools/
 .build/
+.runtime/
 node_modules/
 *.log
